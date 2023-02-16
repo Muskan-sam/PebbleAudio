@@ -40,8 +40,8 @@ dependencies:
   dropdown_formfield: ^0.1.4
   photo_view: ^0.14.0
   flutter_svprogresshud: ^1.0.0
-  slide_popup_dialog: ^0.0.2
-  fileaudioplayer: ^1.0.0
+  slide_popup_dialog_null_safety: ^1.0.0
+  simple_audio_player: ^0.1.4
   path_provider: ^2.0.12
   intl: ^0.18.0
 

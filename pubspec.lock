@@ -71,13 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
-  fileaudioplayer:
-    dependency: "direct main"
-    description:
-      name: fileaudioplayer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -221,18 +214,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  simple_audio_player:
+    dependency: "direct main"
+    description:
+      name: simple_audio_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
-  slide_popup_dialog:
+  slide_popup_dialog_null_safety:
     dependency: "direct main"
     description:
-      name: slide_popup_dialog
+      name: slide_popup_dialog_null_safety
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "1.0.0"
   source_span:
     dependency: transitive
     description:

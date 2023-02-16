@@ -5,13 +5,15 @@ import 'dart:typed_data';
 import 'package:pebble_audio/file_entity_list_tile.dart';
 import 'package:pebble_audio/wav_header.dart';
 import 'package:async/async.dart';
-import 'package:fileaudioplayer/fileaudioplayer.dart';
+import 'package:simple_audio_player/simple_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:slide_popup_dialog/slide_popup_dialog.dart';
+import 'package:slide_popup_dialog_null_safety/pill_gesture.dart';
+import 'package:slide_popup_dialog_null_safety/slide_dialog.dart';
+import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart';
 
 enum RecordState { stopped, recording }
 
@@ -41,7 +43,7 @@ class _DetailPageState extends State<DetailPage> {
 
   List<FileSystemEntity> files = <FileSystemEntity>[];
   String? selectedFilePath;
-  FileAudioPlayer player = FileAudioPlayer();
+  SimpleAudioPlayer player = SimpleAudioPlayer();
 
   @override
   void initState() {
@@ -181,7 +183,8 @@ class _DetailPageState extends State<DetailPage> {
 
                       if (await File(_file.path).exists()) {
                         selectedFilePath = _file.path;
-                        await player.start(_file.path);
+                        await player.prepare(uri: _file.path);
+                        await player.play();
                       } else {
                         selectedFilePath = '';
                       }
