@@ -31,14 +31,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
     _getBTState();
     _stateChangeListener();
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 
@@ -72,7 +72,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       } else {
         devices.clear();
       }
-      print("State isEnabled: ${state.isEnabled}");
       setState(() {});
     });
   }
@@ -98,23 +97,23 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             SwitchListTile(
               title: Text('Enable Bluetooth'),
               value: _bluetoothState.isEnabled,
-              onChanged: (bool value) {
-                future() async {
-                  if (value) {
-                    await FlutterBluetoothSerial.instance.requestEnable();
-                  } else {
-                    await FlutterBluetoothSerial.instance.requestDisable();
-                  }
-                  future().then((_) {
-                    setState(() {});
-                  });
+              onChanged: (bool value) async {
+                if (value) {
+                  await FlutterBluetoothSerial.instance.requestEnable();
+                } else {
+                  await FlutterBluetoothSerial.instance.requestDisable();
                 }
+                setState(() {});
               },
             ),
             ListTile(
               title: Text("Bluetooth STATUS"),
-              subtitle: Text(_bluetoothState.toString()),
-              trailing: ElevatedButton(
+              subtitle: Text(
+                _bluetoothState.toString(),
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.04),
+              ),
+              trailing: MaterialButton(
                 child: Text("Settings"),
                 onPressed: () {
                   FlutterBluetoothSerial.instance.openSettings();
@@ -125,12 +124,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               child: ListView(
                 children: devices
                     .map((_device) => BluetoothDeviceListEntry(
+                  context: context,
                   device: _device,
                   enabled: true,
                   onTap: () {
-                    print("Item");
                     _startCameraConnect(context, _device);
                   },
+                  rssi: 0,
+                  onLongPress: () {},
                 ))
                     .toList(),
               ),
